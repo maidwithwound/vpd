@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import argparse
 from os.path import exists
 import sys
@@ -30,15 +31,15 @@ if __name__ == "__main__":
 
     args = parser.parse_args(sys.argv[1:])
 
+    if args.show_playlist_ids:
+        shit.get_playlists()
+        exit()
+
     if not exists(args.config):
         print("config does not exists")
         exit(-1)
 
     shit = megasuperdownloader(args.config)
-
-    if args.show_playlist_ids:
-        shit.get_playlists()
-        exit()
 
     if not args.playlist_id:
         print("playlist_id is empty. Use '--show-playlist-ids' option.")
