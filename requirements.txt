@@ -1,0 +1,8 @@
+demoji
+vk_api
+requests
+asyncio
+aiohttp
+aiofiles
+music_tag
+pathvalidate
