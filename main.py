@@ -1,4 +1,5 @@
 import argparse
+from os.path import exists
 import sys
 from megasuperdownloader import megasuperdownloader
 
@@ -28,6 +29,11 @@ if __name__ == "__main__":
                         help="how many songs will be downloaded in parralel")
 
     args = parser.parse_args(sys.argv[1:])
+
+    if not exists(args.config):
+        print("config does not exists")
+        exit(-1)
+
     shit = megasuperdownloader(args.config)
 
     if args.show_playlist_ids:
