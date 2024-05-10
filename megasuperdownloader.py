@@ -72,27 +72,27 @@ class megasuperdownloader:
 
     def get_db(self, pl_id, playlist_title, invert_position=False):
         zhopa = self.api.audio.get(playlist_id=pl_id)
-        json_song_db = list()
         db = list()
         position = 0
         offset = 200
         count = 200
 
         while zhopa["items"] != []:
-            if invert_position:
-                zhopa = reversed(zhopa["items"])
-            else:
-                zhopa = zhopa["items"]
-            for song in zhopa:
-                song_obj = audio_obj(song, position)
+            for song in zhopa["items"]:
+                song_obj = audio_obj(song)
                 song_obj.title = demoji.replace(song_obj.title)
                 song_obj.artist = demoji.replace(song_obj.artist)
 
-                json_song_db.append(song_obj.parse())
                 db.append(song_obj)
-                position += 1
             zhopa = self.api.audio.get(playlist_id=pl_id, offset=offset, count=count)
             offset += count
+        
+        if invert_position:
+            db.reverse()
+
+        for song in db:
+            song.position = position
+            position += 1
 
         json_db = dict()
         json_db["title"] = playlist_title
@@ -154,6 +154,7 @@ class megasuperdownloader:
 
         for song in db["items"]:
             fn = f"{working_directory}/{song.generate_file_name()}"
+            print(fn)
             if exists(fn):
                 print(f"{fn} exists")
             else:
