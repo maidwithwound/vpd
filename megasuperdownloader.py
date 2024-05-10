@@ -154,7 +154,6 @@ class megasuperdownloader:
 
         for song in db["items"]:
             fn = f"{working_directory}/{song.generate_file_name()}"
-            print(fn)
             if exists(fn):
                 print(f"{fn} exists")
             else:
