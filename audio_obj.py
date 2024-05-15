@@ -39,7 +39,7 @@ class audio_obj:
 
     def generate_file_name(self):
         if self.position != -1:
-            return sanitize_filename(f"[{self.position}] {self.artist} - {self.title}.mp3")
+            return sanitize_filename(f"[{str(self.position).rjust(4, '0')}] {self.artist} - {self.title}.mp3")
         else:
             return sanitize_filename(f"{self.artist} - {self.title}.mp3")
 
