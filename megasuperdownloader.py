@@ -101,7 +101,7 @@ class megasuperdownloader:
         return json_db
 
     def get_playlist_thumbnail_url(self, playlist_id):
-        pls = self.api.audio.getPlaylists(owner_id=self.user_id)["items"]
+        pls = self.api.audio.getPlaylists(owner_id=self.user_id, count=100)["items"]
 
         for playlist in pls:
             if playlist["id"] == playlist_id:
@@ -112,7 +112,7 @@ class megasuperdownloader:
         print("".join([f"{item['id']} - {item['title']}\n" for item in pls["items"]]))
 
     def get_playlist_title(self, plid, owner_id):
-        pls = self.api.audio.getPlaylists(owner_id=owner_id)
+        pls = self.api.audio.getPlaylists(owner_id=owner_id, count=100)
         for item in pls["items"]:
             if item["id"] == int(plid):
                 return item["title"]
