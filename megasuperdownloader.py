@@ -108,7 +108,7 @@ class megasuperdownloader:
                 return playlist["photo"]["photo_1200"]
 
     def get_playlists(self):
-        pls = self.api.audio.getPlaylists(owner_id=self.user_id)
+        pls = self.api.audio.getPlaylists(owner_id=self.user_id, count=100)
         print("".join([f"{item['id']} - {item['title']}\n" for item in pls["items"]]))
 
     def get_playlist_title(self, plid, owner_id):
